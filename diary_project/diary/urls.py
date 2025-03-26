@@ -1,12 +1,10 @@
-from django.urls import path, include
-from rest_framework.routers import DefaultRouter
-from .views import UserViewSet, DiaryEntryViewSet
-
-router = DefaultRouter()
-router.register(r'users', UserViewSet)
-router.register(r'diary-entries', DiaryEntryViewSet)
+from django.urls import path
+from .views import UserCreate, UserLogin, EntryListCreate, EntryRetrieveUpdateDestroy, EntryHistory
 
 urlpatterns = [
-    path('api/', include(router.urls)),
+    path('users/', UserCreate.as_view()),
+    path('login/', UserLogin.as_view()),
+    path('entries/', EntryListCreate.as_view()),
+    path('entries/<int:pk>/', EntryRetrieveUpdateDestroy.as_view()),
+    path('history/', EntryHistory.as_view()),
 ]
-
